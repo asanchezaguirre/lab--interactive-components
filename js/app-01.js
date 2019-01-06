@@ -68,5 +68,36 @@ var pressHTML = `
 
 document.querySelector('.ui-tabs__content').innerHTML = membershipHTML
 
+//Creamos variable con el que contiene a todo
+var tabList = document.querySelector('.ui-tabs__tabslist')
+//Creamos variable con textos
+var tabContent = document.querySelector('.ui-tabs__content')
+// Creamos variable para cada sección
+var tabsTab = document.querySelectorAll('.ui-tabs__tab')
+
+//Agregamos evento de click
+tabList.addEventListener('click', function(e) { 
+  // Recorremos cada sección de list items
+  tabsTab.forEach(function(list){
+    //Ocupamos la propiedad dataset para evaluar que si la data de cada tab es identica al list con el click en el recorrido entonces,
+    if (e.target.dataset.tab === list.dataset.tab) {
+        //Agregamos la clase "ui-tabs__tab--selected" para los estilos
+        list.classList.add("ui-tabs__tab--selected")
+        //Agregamos otra condiciòn para agregar textos con cada una de las variables que ya venìan declaradas
+        if (e.target.dataset.tab === "membership") {
+          tabContent.innerHTML = membershipHTML
+        } else if (e.target.dataset.tab === "programs") {
+          tabContent.innerHTML = programsHTML
+        } else if (e.target.dataset.tab === "screenings") {
+          tabContent.innerHTML = screeningsHTML
+        } else if (e.target.dataset.tab === "press") {
+          tabContent.innerHTML = pressHTML
+        }
+        //De lo contratio, removemos la clase de estilos
+      } else {
+        list.classList.remove("ui-tabs__tab--selected")
+      }
+  })
+})
 
 
